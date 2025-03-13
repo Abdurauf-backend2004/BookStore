@@ -22,6 +22,12 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = ('id', 'image')
 
 
+class ImagePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = '__all__'
+
+
 class BookSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
 
@@ -38,6 +44,9 @@ class BookPostSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'account': {
                 'read_only': True
+            },
+            'sold': {
+                'required': False,
             }
         }
 
@@ -51,7 +60,3 @@ class BookMarkSoldSerializer(serializers.ModelSerializer):
                 'read_only': True
             }
         }
-
-
-
-

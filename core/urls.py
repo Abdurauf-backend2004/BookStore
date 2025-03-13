@@ -37,6 +37,8 @@ urlpatterns += [
     path('books/<int:pk>/', BookRetrieveUpdateDestroyAPIView.as_view()),
     path('books/<int:pk>/mark-sold/', BookMarkSoldAPIView.as_view()),
     path('books/mine/', MyBooksList.as_view()),
+    path('books/add-image/', ImageCreateAPIView.as_view()),
+    path('books/images/<int:pk>/', ImageRetrieveUpdateDestroyAPIView.as_view()),
 ]
 
 urlpatterns += [

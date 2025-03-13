@@ -9,6 +9,7 @@ import os
 
 class Account(AbstractUser):
     image = models.ImageField(upload_to='accounts/', null=True, blank=True)
+    phone_number = models.CharField(max_length=15, null=True, blank=True)
 
     def __str__(self):
         return self.username
@@ -17,6 +18,7 @@ class Account(AbstractUser):
 class Book(models.Model):
     title = models.CharField(max_length=255)
     details = models.TextField(blank=True, null=True)
+    region = models.CharField(max_length=255, blank=True, null=True)
     price = models.FloatField(validators=[MinValueValidator(0.0)])
     cover = models.CharField(max_length=50, blank=True, null=True)
     sold = models.BooleanField(default=False)

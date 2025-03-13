@@ -107,6 +107,37 @@ class BookRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
         instance.delete()
 
 
+class ImageCreateAPIView(generics.CreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Image.objects.all()
+    serializer_class = ImagePostSerializer
+
+    def perform_create(self, serializer):
+        if serializer.instance.account != self.request.user:
+            raise PermissionDenied(detail='You are not the owner of this book.')
+        serializer.save()
+
+
+class ImageRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImagePostSerializer
+
+    def get_permissions(self):
+        if self.request.method in SAFE_METHODS:
+            return [AllowAny()]
+        return [IsAuthenticated()]
+
+    def perform_update(self, serializer):
+        if serializer.instance.account != self.request.user:
+            raise PermissionDenied(detail='You are not the owner of this book.')
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        if instance.account != self.request.user:
+            raise PermissionDenied(detail='You are not the owner of this book.')
+        instance.delete()
+
+
 class MyBooksList(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = BookSerializer
