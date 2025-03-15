@@ -32,7 +32,7 @@ class Book(models.Model):
 
 class Image(models.Model):
     image = models.ImageField(upload_to='books/')
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='images')
 
     def __str__(self):
         return self.book.title
