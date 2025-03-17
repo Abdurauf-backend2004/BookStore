@@ -22,6 +22,9 @@ class Book(models.Model):
     price = models.FloatField(validators=[MinValueValidator(0.0)])
     cover = models.CharField(max_length=50, blank=True, null=True)
     sold = models.BooleanField(default=False)
+    phone_number = models.CharField(max_length=15, null=True, blank=True)
+    telegram_nickname = models.CharField(max_length=255, null=True, blank=True)
+
 
     created_at = models.DateTimeField(auto_now_add=True)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
