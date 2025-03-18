@@ -112,11 +112,6 @@ class ImageCreateAPIView(generics.CreateAPIView):
     queryset = Image.objects.all()
     serializer_class = ImagePostSerializer
 
-    def perform_create(self, serializer):
-        if serializer.instance.account != self.request.user:
-            raise PermissionDenied(detail='You are not the owner of this book.')
-        serializer.save()
-
 
 class ImageRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Image.objects.all()
