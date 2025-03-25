@@ -1,7 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
-
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
 import os
@@ -39,19 +38,6 @@ class Image(models.Model):
 
     def __str__(self):
         return self.book.title
-
-    # def delete(self, *args, **kwargs):
-    #     if self.image and os.path.isfile(self.image.path):
-    #         os.remove(self.image.path)
-    #     super().delete(*args, **kwargs)
-
-
-# @receiver(post_delete, sender=Image)
-# def delete_file(sender, instance, **kwargs):
-#     if instance.image:
-#         if os.path.isfile(instance.image.path):
-#             os.remove(instance.image.path)
-
 
 class Wishlist(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
